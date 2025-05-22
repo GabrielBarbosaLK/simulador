@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simulador</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #1e1e1e;
+      font-family: sans-serif;
+    }
+
+    .box {
+      width: 125px;
+      height: 100px;
+      background: #4e9af1;
+      border-radius: 12px;
+      position: absolute;
+      cursor: move;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .data {
+      width: 20px;
+      height: 20px;
+      background: #f4d03f;
+      border-radius: 50%;
+      position: absolute;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 20;
+    }
+  </style>
+</head>
+<body>
+  <div id="box1" class="box" style="left: 100px; top: 200px;">Componente 1</div>
+  <div id="box2" class="box" style="left: 400px; top: 200px;">Componente 2</div>
+  <div id="box3" class="box" style="left: 700px; top: 100px;">Componente 3</div>
+  <div id="box4" class="box" style="left: 700px; top: 300px;">Componente 4</div>
+
+  <svg id="svg" width="100%" height="100%">
+    <path id="line1" stroke="white" stroke-width="2" fill="none" />
+    <path id="line2" stroke="white" stroke-width="2" fill="none" />
+    <path id="line3" stroke="white" stroke-width="2" fill="none" />
+  </svg>
+
+  <!-- Bolinhas (vão ser clonadas) -->
+  <div id="data1" class="data"></div>
+
+  <button id="button">Avançar Dado</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+
+  <script>
+    const boxes = {
+      box1: document.getElementById("box1"),
+      box2: document.getElementById("box2"),
+      box3: document.getElementById("box3"),
+      box4: document.getElementById("box4")
+    };
+
+    const lines = {
+      line1: document.getElementById("line1"), // box1 → box2
+      line2: document.getElementById("line2"), // box2 → box3
+      line3: document.getElementById("line3")  // box2 → box4
+    };
+
+    const svg = document.getElementById("svg");
+    const button = document.getElementById("button");
+    let currentStep = 0;
+    let data = document.getElementById("data1");
+
+    function getConnectionPoints(from, to) {
+      const rectFrom = from.getBoundingClientRect();
+      const rectTo = to.getBoundingClientRect();
+
+      const x1 = rectFrom.left + rectFrom.width;
+      const y1 = rectFrom.top + rectFrom.height / 2;
+
+      const x2 = rectTo.left;
+      const y2 = rectTo.top + rectTo.height / 2;
+
+      return { x1, y1, x2, y2 };
+    }
+
+    function updateLines() {
+      const p1 = getConnectionPoints(boxes.box1, boxes.box2);
+      const p2 = getConnectionPoints(boxes.box2, boxes.box3);
+      const p3 = getConnectionPoints(boxes.box2, boxes.box4);
+
+      lines.line1.setAttribute("d", `M ${p1.x1},${p1.y1} L ${p1.x2},${p1.y2}`);
+      lines.line2.setAttribute("d", `M ${p2.x1},${p2.y1} L ${p2.x2},${p2.y2}`);
+      lines.line3.setAttribute("d", `M ${p3.x1},${p3.y1} L ${p3.x2},${p3.y2}`);
+    }
+
+    function moveBall(ball, line, onComplete = null) {
+      const start = line.getPointAtLength(0);
+      gsap.set(ball, {
+        x: start.x - 10,
+        y: start.y - 10
+      });
+
+      gsap.to(ball, {
+        duration: 1,
+        ease: "power1.inOut",
+        motionPath: {
+          path: line,
+          align: line,
+          alignOrigin: [0.5, 0.5],
+          autoRotate: false
+        },
+        onComplete
+      });
+    }
+
+    function advanceData() {
+      if (currentStep === 0) {
+        moveBall(data, lines.line1);
+      } else if (currentStep === 1) {
+        // Clona bolinha e manda uma para box3 e outra para box4
+        const clone1 = data.cloneNode(true);
+        const clone2 = data.cloneNode(true);
+        document.body.appendChild(clone1);
+        document.body.appendChild(clone2);
+
+        // Esconde bolinha original
+        data.style.display = "none";
+
+        moveBall(clone1, lines.line2);
+        moveBall(clone2, lines.line3);
+      }
+      currentStep++;
+    }
+
+    function placeBallAtStart() {
+      const { x1, y1 } = getConnectionPoints(boxes.box1, boxes.box2);
+      data.style.left = `${x1 - 10}px`;
+      data.style.top = `${y1 - 10}px`;
+    }
+
+    // Tornar caixas arrastáveis
+    interact(".box").draggable({
+      listeners: {
+        move(event) {
+          const target = event.target;
+          const left = parseFloat(target.style.left) || 0;
+          const top = parseFloat(target.style.top) || 0;
+
+          target.style.left = `${left + event.dx}px`;
+          target.style.top = `${top + event.dy}px`;
+
+          updateLines();
+        }
+      }
+    });
+
+    window.onload = () => {
+      updateLines();
+      placeBallAtStart();
+    };
+
+    button.addEventListener("click", advanceData);
+  </script>
+</body>
+</html>
