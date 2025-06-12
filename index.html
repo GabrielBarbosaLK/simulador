@@ -13,15 +13,24 @@
 
     .box {
       width: 125px;
-      height: 100px;
-      background: #4e9af1;
-      border-radius: 12px;
+      height: 225px;
+      background: #0fa341;
       position: absolute;
-      cursor: move;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
+    }
+
+    .minibox {
+    width: 100px;
+    height: 50px;
+    background: #ffa500;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
     }
 
     .data {
@@ -56,45 +65,133 @@
       cursor: pointer;
       z-index: 20;
     }
+
+    #button_reset {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 20;
+    }
+
+    /* Novo componente trapezoidal */
+    .trapezoid {
+    width: 100px;
+    height: 50px;
+    background: #d3d3d3;
+    position: absolute;
+    clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
+    transform: rotate(90deg);
+    transform-origin: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+  }
   </style>
 </head>
 <body>
-  <div id="box1" class="box" style="left: 100px; top: 200px;">Componente 1</div>
-  <div id="box2" class="box" style="left: 400px; top: 200px;">Componente 2</div>
-  <div id="box3" class="box" style="left: 700px; top: 100px;">Componente 3</div>
-  <div id="box4" class="box" style="left: 700px; top: 300px;">Componente 4</div>
+  <div style="position: absolute; top: 25px; left: 25px;">
+    <h2 style="color: #0fa341;">Escolha uma operação para simular</h2>
+    <select id="op" name="operacao">
+      <option value="" disabled selected>Operação</option>
+      <option value="add">ADD</option>
+      <option value="sub">SUB</option>
+    </select>
 
+    <select id="reg1" name="reg1">
+      <option value="" disabled selected>Registrador</option>
+      <option value="reg0">reg0</option>
+      <option value="reg1">reg1</option>
+      <option value="reg2">reg2</option>
+      <option value="reg3">reg3</option>
+    </select>
+
+    <select id="reg2" name="reg2">
+      <option value="" disabled selected>Registrador</option>
+      <option value="reg0">reg0</option>
+      <option value="reg1">reg1</option>
+      <option value="reg2">reg2</option>
+      <option value="reg3">reg3</option>
+    </select>
+
+    <select id="reg3" name="reg3">
+      <option value="" disabled selected>Registrador</option>
+      <option value="reg0">reg0</option>
+      <option value="reg1">reg1</option>
+      <option value="reg2">reg2</option>
+      <option value="reg3">reg3</option>
+    </select>
+
+  </div>  
+  <!-- Desenho da arquitetura -->
+
+  <!-- Datapath oficial -->
+  <div id="box1" class="box" style="left: 550px; top: 300px; display: flex; flex-direction: column;">
+    <p>GPR</p>
+    Reg0
+    <input type="number" id="rreg0" style="width: 75px;">
+    Reg1
+    <input type="number" id="rreg1" style="width: 75px;">
+    Reg2
+    <input type="number" id="rreg2" style="width: 75px;">
+    Reg3
+    <input type="number" id="rreg3" style="width: 75px;">
+  </div>
+
+
+  <div id="box2" class="box" style="left: 750px; top: 300px; display: flex; flex-direction: column;">
+    <p>ULA</p>
+    <label id="ula_op">OP: </label>
+    <label id="rega">REG A: </label>
+    <label id="regb">REG B: </label>
+  </div>
+  <div id="box3" class="box" style="left: 950px; top: 300px; display: flex; flex-direction: column;">
+   <p>Resultado</p>
+   <label id="result"> </label>
+  </div>
+
+  <!-- Linhas -->
   <svg id="svg" width="100%" height="100%">
     <path id="line1" stroke="white" stroke-width="2" fill="none" />
     <path id="line2" stroke="white" stroke-width="2" fill="none" />
     <path id="line3" stroke="white" stroke-width="2" fill="none" />
   </svg>
 
-  <!-- Bolinhas (vão ser clonadas) -->
+  <!-- Bolinha -->
   <div id="data1" class="data"></div>
 
-  <button id="button">Avançar Dado</button>
+  <button id="button">Play</button>
+  <button id="button_reset" style="left: 900px;">Reset</button>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
 
   <script>
     const boxes = {
       box1: document.getElementById("box1"),
       box2: document.getElementById("box2"),
-      box3: document.getElementById("box3"),
-      box4: document.getElementById("box4")
+      box3: document.getElementById("box3")
     };
 
     const lines = {
-      line1: document.getElementById("line1"), // box1 → box2
-      line2: document.getElementById("line2"), // box2 → box3
-      line3: document.getElementById("line3")  // box2 → box4
+      line1: document.getElementById("line1"),
+      line2: document.getElementById("line2"),
+      line3: document.getElementById("line3")
     };
 
     const svg = document.getElementById("svg");
     const button = document.getElementById("button");
+    const button_reset = document.getElementById("button_reset");
     let currentStep = 0;
     let data = document.getElementById("data1");
 
@@ -113,11 +210,11 @@
 
     function updateLines() {
       const p1 = getConnectionPoints(boxes.box1, boxes.box2);
-      const p2 = getConnectionPoints(boxes.box2, boxes.box3);
-      const p3 = getConnectionPoints(boxes.box2, boxes.box4);
+      const p2 = getConnectionPoints(boxes.box1, boxes.box2);
+      const p3 = getConnectionPoints(boxes.box2, boxes.box3);
 
-      lines.line1.setAttribute("d", `M ${p1.x1},${p1.y1} L ${p1.x2},${p1.y2}`);
-      lines.line2.setAttribute("d", `M ${p2.x1},${p2.y1} L ${p2.x2},${p2.y2}`);
+      lines.line1.setAttribute("d", `M ${p1.x1},${p1.y1-25} L ${p1.x2},${p1.y2-25}`);
+      lines.line2.setAttribute("d", `M ${p2.x1},${p2.y1+25} L ${p2.x2},${p2.y2+25}`);
       lines.line3.setAttribute("d", `M ${p3.x1},${p3.y1} L ${p3.x2},${p3.y2}`);
     }
 
@@ -142,52 +239,61 @@
     }
 
     function advanceData() {
+        
+        const op = document.getElementById("op").value;
+        const reg1 = document.getElementById("reg1").value;
+        const reg2 = document.getElementById("reg2").value;
+        const reg3 = document.getElementById("reg3").value;
+        const valor1 = document.getElementById("r"+reg1).value;
+        const valor2 = document.getElementById("r"+reg2).value;
+        let valor3;
+
       if (currentStep === 0) {
-        moveBall(data, lines.line1);
-      } else if (currentStep === 1) {
-        // Clona bolinha e manda uma para box3 e outra para box4
         const clone1 = data.cloneNode(true);
         const clone2 = data.cloneNode(true);
+        clone1.id = "apagar1";
+        clone2.id = "apagar2";
         document.body.appendChild(clone1);
         document.body.appendChild(clone2);
-
-        // Esconde bolinha original
         data.style.display = "none";
 
-        moveBall(clone1, lines.line2);
-        moveBall(clone2, lines.line3);
+        moveBall(clone1, lines.line1);
+        moveBall(clone2, lines.line2);
+
+        document.getElementById("ula_op").innerHTML = "OP: " + op;
+        document.getElementById("rega").innerHTML = "REG A: " + valor1;
+        document.getElementById("regb").innerHTML = "REG B: " + valor2;
+
+      } else if (currentStep === 1) {
+        data.style.display = "block";
+        moveBall(data, lines.line3);
+        
+        if (op == "add") {
+          valor3 = parseInt(valor1) + parseInt(valor2);
+        } else {
+          valor3 = parseInt(valor1) - parseInt(valor2);
+        }
+        
+        document.getElementById("result").innerHTML = valor3;
+        document.getElementById("r"+reg3).value = valor3;
       }
       currentStep++;
     }
 
-    function placeBallAtStart() {
-      const { x1, y1 } = getConnectionPoints(boxes.box1, boxes.box2);
-      data.style.left = `${x1 - 10}px`;
-      data.style.top = `${y1 - 10}px`;
+    function reset_func() {
+      console.log("reset_func");
+      currentStep = 0;
+      updateLines();
+      document.getElementById("apagar1").remove();
+      document.getElementById("apagar2").remove();
     }
-
-    // Tornar caixas arrastáveis
-    interact(".box").draggable({
-      listeners: {
-        move(event) {
-          const target = event.target;
-          const left = parseFloat(target.style.left) || 0;
-          const top = parseFloat(target.style.top) || 0;
-
-          target.style.left = `${left + event.dx}px`;
-          target.style.top = `${top + event.dy}px`;
-
-          updateLines();
-        }
-      }
-    });
 
     window.onload = () => {
       updateLines();
-      placeBallAtStart();
     };
 
     button.addEventListener("click", advanceData);
+    button_reset.addEventListener("click", reset_func);
   </script>
 </body>
 </html>
