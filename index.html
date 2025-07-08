@@ -22,6 +22,17 @@
       color: white;
     }
 
+    .flag {
+    width: 25px;
+    height: 25px;
+    background: #d3d3d3;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    }
+
     .minibox {
     width: 100px;
     height: 50px;
@@ -34,13 +45,22 @@
     }
 
     .data {
-      width: 20px;
-      height: 20px;
-      background: #f4d03f;
-      border-radius: 50%;
-      position: absolute;
-      pointer-events: none;
-      z-index: 10;
+    width: 50px;
+    height: 50px;
+    background: #f4d03f;
+    border-radius: 50%;
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    white-space: nowrap;
+
+    line-height: 50px;
     }
 
     svg {
@@ -150,11 +170,13 @@
 
 
   <div id="box2" class="box" style="left: 750px; top: 300px; display: flex; flex-direction: column;">
+    <div id="flag1" class="flag" style="position: absolute; top: 10px; left: 90px;">V</div>
     <p>ULA</p>
     <label id="ula_op">OP: </label>
     <label id="rega">REG A: </label>
     <label id="regb">REG B: </label>
   </div>
+
   <div id="box3" class="box" style="left: 950px; top: 300px; display: flex; flex-direction: column;">
    <p>Resultado</p>
    <label id="result"> </label>
@@ -168,7 +190,7 @@
   </svg>
 
   <!-- Bolinha -->
-  <div id="data1" class="data"></div>
+  <div id="data1" class="data" style="display: none;"></div>
 
   <button id="button">Play</button>
   <button id="button_reset" style="left: 900px;">Reset</button>
@@ -177,6 +199,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
 
   <script>
+
     const boxes = {
       box1: document.getElementById("box1"),
       box2: document.getElementById("box2"),
@@ -249,10 +272,14 @@
         let valor3;
 
       if (currentStep === 0) {
+        data.style.display = "block";
         const clone1 = data.cloneNode(true);
         const clone2 = data.cloneNode(true);
         clone1.id = "apagar1";
         clone2.id = "apagar2";
+        clone1.innerText = valor1;
+        clone2.innerText = valor2;
+
         document.body.appendChild(clone1);
         document.body.appendChild(clone2);
         data.style.display = "none";
@@ -273,6 +300,11 @@
         } else {
           valor3 = parseInt(valor1) - parseInt(valor2);
         }
+
+        if (valor3 > 32767 || valor3 < -32768) {
+          document.getElementById("flag1").style.background = "red";
+        }
+        data.innerText = valor3;
         
         document.getElementById("result").innerHTML = valor3;
         document.getElementById("r"+reg3).value = valor3;
@@ -281,11 +313,16 @@
     }
 
     function reset_func() {
-      console.log("reset_func");
+      document.getElementById("ula_op").innerHTML = "OP: ";
+      document.getElementById("rega").innerHTML = "REG A: ";
+      document.getElementById("regb").innerHTML = "REG B: ";
+      document.getElementById("result").innerHTML = "";
+      document.getElementById("flag1").style.background = "#d3d3d3";
       currentStep = 0;
       updateLines();
       document.getElementById("apagar1").remove();
       document.getElementById("apagar2").remove();
+      data.style.display = "none";
     }
 
     window.onload = () => {
