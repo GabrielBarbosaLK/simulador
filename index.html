@@ -158,79 +158,85 @@
   </style>
 </head>
 <body>
-  <div style="position: absolute; top: 25px; left: 25px;">
-    <h2 style="color: #0fa341;">Escolha uma operação para simular</h2>
-    <select id="op" name="operacao">
-      <option value="" disabled selected>Operação</option>
-      <option value="add">ADD</option>
-      <option value="sub">SUB</option>
-    </select>
+  <div style="position: relative; left: 25%;">
+    <div style="position: absolute; top: 25px; left: 25px;">
+      <h2 style="color: #0fa341;">Escolha uma operação para simular</h2>
+      <select id="op" name="operacao">
+        <option value="" disabled selected>Operação</option>
+        <option value="add">ADD</option>
+        <option value="sub">SUB</option>
+      </select>
 
-    <select id="reg1" name="reg1">
-      <option value="" disabled selected>Registrador</option>
-      <option value="reg0">reg0</option>
-      <option value="reg1">reg1</option>
-      <option value="reg2">reg2</option>
-      <option value="reg3">reg3</option>
-    </select>
+      <select id="reg1" name="reg1">
+        <option value="" disabled selected>Registrador</option>
+        <option value="reg0">reg0</option>
+        <option value="reg1">reg1</option>
+        <option value="reg2">reg2</option>
+        <option value="reg3">reg3</option>
+      </select>
 
-    <select id="reg2" name="reg2">
-      <option value="" disabled selected>Registrador</option>
-      <option value="reg0">reg0</option>
-      <option value="reg1">reg1</option>
-      <option value="reg2">reg2</option>
-      <option value="reg3">reg3</option>
-    </select>
+      <select id="reg2" name="reg2">
+        <option value="" disabled selected>Registrador</option>
+        <option value="reg0">reg0</option>
+        <option value="reg1">reg1</option>
+        <option value="reg2">reg2</option>
+        <option value="reg3">reg3</option>
+      </select>
 
-    <select id="reg3" name="reg3">
-      <option value="" disabled selected>Registrador</option>
-      <option value="reg0">reg0</option>
-      <option value="reg1">reg1</option>
-      <option value="reg2">reg2</option>
-      <option value="reg3">reg3</option>
-    </select>
+      <select id="reg3" name="reg3">
+        <option value="" disabled selected>Registrador</option>
+        <option value="reg0">reg0</option>
+        <option value="reg1">reg1</option>
+        <option value="reg2">reg2</option>
+        <option value="reg3">reg3</option>
+      </select>
 
-  </div>
-  <!-- Desenho da arquitetura -->
-
-  <!-- Datapath oficial -->
-  <div id="box1" class="GPR" style="left: 525px; top: 235px; display: flex; flex-direction: column;">
-    <p>GPR</p>
-    Reg0
-    <input type="number" id="rreg0" style="width: 75px;" max="32767" min="-32768">
-    Reg1
-    <input type="number" id="rreg1" style="width: 75px;" max="32767" min="-32768">
-    Reg2
-    <input type="number" id="rreg2" style="width: 75px;" max="32767" min="-32768">
-    Reg3
-    <input type="number" id="rreg3" style="width: 75px;" max="32767" min="-32768">
-  </div>
-
-
-  <div id="ULA" style="position: absolute; top: 150px; left: 700px;">
-    <div class="triangulo_direita" style="position: absolute;"></div>
-    <div class="triangulo_esquerda" style="position: absolute; top: 49px;"></div>
-    <div class="triangulo_direita" style="position: absolute; top: 259px;"></div>
-    <div class="triangulo_esquerda" style="position: absolute; top: 210px;"></div>
-    <div class="retangulo" style="position: absolute; top: 160px; left: 100px;">
-      <div style="display: flex; flex-direction: column; margin-left: 10px;">
-        <p>ULA</p>
-        <label id="ula_op">OP: </label>
-        <label id="rega">REG A: </label>
-        <label id="regb">REG B: </label>
-      </div>
     </div>
-    <div id="flag1" class="flag" style="position: absolute; top: 100px; left: 160px;">V</div>
+    <!-- Desenho da arquitetura -->
+
+    <!-- Datapath oficial -->
+    <div style="position: absolute; left: -425px;">
+      <div id="box1" class="GPR" style="left: 525px; top: 235px; display: flex; flex-direction: column;">
+        <p>GPR</p>
+        Reg0
+        <input type="number" id="rreg0" style="width: 75px;" max="32767" min="-32768">
+        Reg1
+        <input type="number" id="rreg1" style="width: 75px;" max="32767" min="-32768">
+        Reg2
+        <input type="number" id="rreg2" style="width: 75px;" max="32767" min="-32768">
+        Reg3
+        <input type="number" id="rreg3" style="width: 75px;" max="32767" min="-32768">
+      </div>
+
+
+      <div id="ULA" style="position: absolute; top: 150px; left: 700px;">
+        <div class="triangulo_direita" style="position: absolute;"></div>
+        <div class="triangulo_esquerda" style="position: absolute; top: 49px;"></div>
+        <div class="triangulo_direita" style="position: absolute; top: 259px;"></div>
+        <div class="triangulo_esquerda" style="position: absolute; top: 210px;"></div>
+        <div class="retangulo" style="position: absolute; top: 160px; left: 99px;">
+          <div style="display: flex; flex-direction: column; margin-left: 10px;">
+            <p>ULA</p>
+            <label id="ula_op">OP: </label>
+            <label id="rega">REG A: </label>
+            <label id="regb">REG B: </label>
+          </div>
+        </div>
+        <div id="flag1" class="flag" style="position: absolute; top: 100px; left: 160px;">V</div>
+      </div>
+
+      <div id="box3" class="resultado" style="left: 1000px; top: 325px; display: flex; flex-direction: column;">
+      <p>Resultado</p>
+      <label id="result"> </label>
+      </div>
+
+      <div id="p1" style="position: absolute; top: 600px; left: 1060px; width: 5px; height: 5px;"></div>
+      <div id="p2" style="position: absolute; top: 600px; left: 580px; width: 5px; height: 5px;"></div>
+    </div>
+
+    <button id="button">Avançar</button>
+    <button id="button_reset">Reiniciar</button>
   </div>
-
-  <div id="box3" class="resultado" style="left: 1000px; top: 325px; display: flex; flex-direction: column;">
-  <p>Resultado</p>
-  <label id="result"> </label>
-  </div>
-
-  <div id="p1" style="position: absolute; top: 600px; left: 1060px; width: 5px; height: 5px;"></div>
-  <div id="p2" style="position: absolute; top: 600px; left: 580px; width: 5px; height: 5px;"></div>
-
   <!-- Linhas -->
   <svg id="svg" width="100%" height="100%">
     <path id="line1" stroke="white" stroke-width="2" fill="none" />
@@ -243,9 +249,6 @@
 
   <!-- Bolinha -->
   <div id="data1" class="data" style="display: none;"></div>
-
-  <button id="button">Avançar</button>
-  <button id="button_reset">Reiniciar</button>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
