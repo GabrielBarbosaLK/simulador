@@ -11,9 +11,20 @@
       font-family: sans-serif;
     }
 
-    .box {
+    .resultado {
       width: 125px;
-      height: 225px;
+      height: 100px;
+      background: #0fa341;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .GPR {
+      width: 125px;
+      height: 300px;
       background: #0fa341;
       position: absolute;
       display: flex;
@@ -23,44 +34,44 @@
     }
 
     .flag {
-    width: 25px;
-    height: 25px;
-    background: #d3d3d3;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: black;
+      width: 25px;
+      height: 25px;
+      background: #d3d3d3;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
     }
 
     .minibox {
-    width: 100px;
-    height: 50px;
-    background: #ffa500;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+      width: 100px;
+      height: 50px;
+      background: #ffa500;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
     }
 
     .data {
-    width: 50px;
-    height: 50px;
-    background: #f4d03f;
-    border-radius: 50%;
-    position: absolute;
-    pointer-events: none;
-    z-index: 10;
+      width: 50px;
+      height: 50px;
+      background: #f4d03f;
+      border-radius: 50%;
+      position: absolute;
+      pointer-events: none;
+      z-index: 10;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-    text-align: center;
-    white-space: nowrap;
+      text-align: center;
+      white-space: nowrap;
 
-    line-height: 50px;
+      line-height: 50px;
     }
 
     svg {
@@ -73,8 +84,8 @@
 
     #button {
       position: absolute;
-      bottom: 20px;
-      left: 50%;
+      top: 50px;
+      left: 550px;
       transform: translateX(-50%);
       padding: 10px 20px;
       background: #27ae60;
@@ -88,8 +99,8 @@
 
     #button_reset {
       position: absolute;
-      bottom: 20px;
-      left: 50%;
+      top: 50px;
+      left: 700px;
       transform: translateX(-50%);
       padding: 10px 20px;
       background: #27ae60;
@@ -101,22 +112,49 @@
       z-index: 20;
     }
 
-    /* Novo componente trapezoidal */
     .trapezoid {
-    width: 100px;
-    height: 50px;
-    background: #d3d3d3;
-    position: absolute;
-    clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
-    transform: rotate(90deg);
-    transform-origin: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
-  }
+      width: 100px;
+      height: 50px;
+      background: #d3d3d3;
+      position: absolute;
+      clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
+      transform: rotate(90deg);
+      transform-origin: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .triangulo_direita {
+      width: 0;
+      height: 0;
+      margin: 50px;
+      border-top: 50px solid transparent;
+      border-bottom: 50px solid transparent;
+      border-left: 150px solid #0fa341;
+    }
+
+    .triangulo_esquerda {
+      width: 0;
+      height: 0;
+      margin: 50px;
+      border-top: 50px solid transparent;
+      border-bottom: 50px solid transparent;
+      border-right: 150px solid #0fa341;
+    }
+
+    .retangulo {
+      width: 100px;
+      height: 150px;
+      background: #0fa341;
+      position: absolute;
+      display: flex;
+      justify-content: left;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -152,48 +190,62 @@
       <option value="reg3">reg3</option>
     </select>
 
-  </div>  
+  </div>
   <!-- Desenho da arquitetura -->
 
   <!-- Datapath oficial -->
-  <div id="box1" class="box" style="left: 550px; top: 300px; display: flex; flex-direction: column;">
+  <div id="box1" class="GPR" style="left: 525px; top: 235px; display: flex; flex-direction: column;">
     <p>GPR</p>
     Reg0
-    <input type="number" id="rreg0" style="width: 75px;">
+    <input type="number" id="rreg0" style="width: 75px;" max="32767" min="-32768">
     Reg1
-    <input type="number" id="rreg1" style="width: 75px;">
+    <input type="number" id="rreg1" style="width: 75px;" max="32767" min="-32768">
     Reg2
-    <input type="number" id="rreg2" style="width: 75px;">
+    <input type="number" id="rreg2" style="width: 75px;" max="32767" min="-32768">
     Reg3
-    <input type="number" id="rreg3" style="width: 75px;">
+    <input type="number" id="rreg3" style="width: 75px;" max="32767" min="-32768">
   </div>
 
 
-  <div id="box2" class="box" style="left: 750px; top: 300px; display: flex; flex-direction: column;">
-    <div id="flag1" class="flag" style="position: absolute; top: 10px; left: 90px;">V</div>
-    <p>ULA</p>
-    <label id="ula_op">OP: </label>
-    <label id="rega">REG A: </label>
-    <label id="regb">REG B: </label>
+  <div id="ULA" style="position: absolute; top: 150px; left: 700px;">
+    <div class="triangulo_direita" style="position: absolute;"></div>
+    <div class="triangulo_esquerda" style="position: absolute; top: 49px;"></div>
+    <div class="triangulo_direita" style="position: absolute; top: 259px;"></div>
+    <div class="triangulo_esquerda" style="position: absolute; top: 210px;"></div>
+    <div class="retangulo" style="position: absolute; top: 160px; left: 100px;">
+      <div style="display: flex; flex-direction: column; margin-left: 10px;">
+        <p>ULA</p>
+        <label id="ula_op">OP: </label>
+        <label id="rega">REG A: </label>
+        <label id="regb">REG B: </label>
+      </div>
+    </div>
+    <div id="flag1" class="flag" style="position: absolute; top: 100px; left: 160px;">V</div>
   </div>
 
-  <div id="box3" class="box" style="left: 950px; top: 300px; display: flex; flex-direction: column;">
-   <p>Resultado</p>
-   <label id="result"> </label>
+  <div id="box3" class="resultado" style="left: 1000px; top: 325px; display: flex; flex-direction: column;">
+  <p>Resultado</p>
+  <label id="result"> </label>
   </div>
+
+  <div id="p1" style="position: absolute; top: 600px; left: 1060px; width: 5px; height: 5px;"></div>
+  <div id="p2" style="position: absolute; top: 600px; left: 580px; width: 5px; height: 5px;"></div>
 
   <!-- Linhas -->
   <svg id="svg" width="100%" height="100%">
     <path id="line1" stroke="white" stroke-width="2" fill="none" />
     <path id="line2" stroke="white" stroke-width="2" fill="none" />
     <path id="line3" stroke="white" stroke-width="2" fill="none" />
+    <path id="line4" stroke="white" stroke-width="2" fill="none" />
+    <path id="line5" stroke="white" stroke-width="2" fill="none" />
+    <path id="line6" stroke="white" stroke-width="2" fill="none" />
   </svg>
 
   <!-- Bolinha -->
   <div id="data1" class="data" style="display: none;"></div>
 
-  <button id="button">Play</button>
-  <button id="button_reset" style="left: 900px;">Reset</button>
+  <button id="button">Avançar</button>
+  <button id="button_reset">Reiniciar</button>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
@@ -202,14 +254,19 @@
 
     const boxes = {
       box1: document.getElementById("box1"),
-      box2: document.getElementById("box2"),
-      box3: document.getElementById("box3")
+      box2: document.getElementById("ULA"),
+      box3: document.getElementById("box3"),
+      box4: document.getElementById("p1"),
+      box5: document.getElementById("p2"),
     };
 
     const lines = {
       line1: document.getElementById("line1"),
       line2: document.getElementById("line2"),
-      line3: document.getElementById("line3")
+      line3: document.getElementById("line3"),
+      line4: document.getElementById("line4"),
+      line5: document.getElementById("line5"),
+      line6: document.getElementById("line6")
     };
 
     const svg = document.getElementById("svg");
@@ -235,10 +292,16 @@
       const p1 = getConnectionPoints(boxes.box1, boxes.box2);
       const p2 = getConnectionPoints(boxes.box1, boxes.box2);
       const p3 = getConnectionPoints(boxes.box2, boxes.box3);
+      const p4 = getConnectionPoints(boxes.box3, boxes.box4);
+      const p5 = getConnectionPoints(boxes.box4, boxes.box5);
+      const p6 = getConnectionPoints(boxes.box5, boxes.box1);
 
-      lines.line1.setAttribute("d", `M ${p1.x1},${p1.y1-25} L ${p1.x2},${p1.y2-25}`);
-      lines.line2.setAttribute("d", `M ${p2.x1},${p2.y1+25} L ${p2.x2},${p2.y2+25}`);
-      lines.line3.setAttribute("d", `M ${p3.x1},${p3.y1} L ${p3.x2},${p3.y2}`);
+      lines.line1.setAttribute("d", `M ${p1.x1},${p1.y1-75} L ${p1.x2+50},${p1.y2+100}`);
+      lines.line2.setAttribute("d", `M ${p2.x1},${p2.y1+75} L ${p2.x2+50},${p2.y2+350}`);
+      lines.line3.setAttribute("d", `M ${p3.x1+200},${p3.y1+225} L ${p3.x2},${p3.y2}`);
+      lines.line4.setAttribute("d", `M ${p4.x1-62.5},${p4.y1+50} L ${p4.x2+2.5},${p4.y2}`);
+      lines.line5.setAttribute("d", `M ${p5.x1-2.5},${p5.y1} L ${p5.x2+2.5},${p5.y2}`);
+      lines.line6.setAttribute("d", `M ${p6.x1-2.5},${p6.y1} L ${p6.x2+57.5},${p6.y2+150}`);
     }
 
     function moveBall(ball, line, onComplete = null) {
@@ -307,7 +370,23 @@
         data.innerText = valor3;
         
         document.getElementById("result").innerHTML = valor3;
-        document.getElementById("r"+reg3).value = valor3;
+
+        const clone3 = data.cloneNode(true);
+        clone3.id = "apagar3";
+        clone3.innerText = valor3;
+        document.body.appendChild(clone3);
+        clone3.style.display = "none";
+      } else if (currentStep === 2) {
+        document.getElementById("r"+reg3).value = document.getElementById("result").innerHTML;
+        const clone3 = document.getElementById("apagar3");
+        clone3.style.display = "block";
+        moveBall(clone3, lines.line4);
+        setTimeout(() => {
+          moveBall(clone3, lines.line5);
+        }, 1000);
+        setTimeout(() => {
+          moveBall(clone3, lines.line6);
+        }, 2000);
       }
       currentStep++;
     }
@@ -322,6 +401,7 @@
       updateLines();
       document.getElementById("apagar1").remove();
       document.getElementById("apagar2").remove();
+      document.getElementById("apagar3").remove();
       data.style.display = "none";
     }
 
@@ -331,6 +411,51 @@
 
     button.addEventListener("click", advanceData);
     button_reset.addEventListener("click", reset_func);
+
+    const rreg0 = document.getElementById('rreg0');
+    const rreg1 = document.getElementById('rreg1');
+    const rreg2 = document.getElementById('rreg2');
+    const rreg3 = document.getElementById('rreg3');
+
+    rreg0.addEventListener('input', function() {
+      const inputValue = rreg0.value;
+
+      if (inputValue > 32767) {
+        rreg0.value = 32767;
+      } else if (inputValue < -32768) {
+        rreg0.value = -32768;
+      }
+    });
+
+    rreg1.addEventListener('input', function() {
+      const inputValue = rreg1.value;
+
+      if (inputValue > 32767) {
+        rreg1.value = 32767;
+      } else if (inputValue < -32768) {
+        rreg1.value = -32768;
+      }
+    });
+
+    rreg2.addEventListener('input', function() {
+      const inputValue = rreg2.value;
+
+      if (inputValue > 32767) {
+        rreg2.value = 32767;
+      } else if (inputValue < -32768) {
+        rreg2.value = -32768;
+      }
+    });
+
+    rreg3.addEventListener('input', function() {
+      const inputValue = rreg3.value;
+
+      if (inputValue > 32767) {
+        rreg3.value = 32767;
+      } else if (inputValue < -32768) {
+        rreg3.value = -32768;
+      }
+    });
   </script>
 </body>
 </html>
