@@ -101,7 +101,7 @@ O simulador utiliza uma linguagem Assembly própria, definida especificamente pa
 As instruções seguem os formatos definidos pela **ISA (Instruction Set Architecture)** do simulador.  
 Cada formato especifica a posição dos campos como **opcode**, registradores e valores imediatos.
 
-Os formatos são apresentados por meio de **figuras**, facilitando a visualização da organização dos 16 bits e o entendimento do processo de decodificação das instruções.
+Os formatos serão apresentados por uma **figura**, facilitando a visualização da organização dos 16 bits e o entendimento do processo de decodificação das instruções.
 
 ![Instruções](ISA_instrucoes.png)
 
@@ -125,7 +125,6 @@ A interação com o simulador é realizada por meio dos seguintes controles:
 - **ASSEMBLE (Montar)**: traduz o código Assembly para a representação interna de instruções
 - **PLAY**: inicia a execução contínua do programa
 - **PAUSE**: pausa a execução no ciclo atual
-- **STOP**: encerra a execução e reinicia o estado do simulador
 - **FORWARD (Passo-a-Passo)**: executa o programa de forma controlada, permitindo análise instrução por instrução ou ciclo a ciclo
 
 ---
@@ -135,7 +134,7 @@ A interação com o simulador é realizada por meio dos seguintes controles:
 O simulador permite ajustar diferentes opções de execução e visualização:
 
 - Exibição de valores em **Hexadecimal** ou **Decimal**
-- Operação **Com Sinal** ou **Sem Sinal**, influenciando a interpretação dos dados
+- Exubução de sinais de controle **Com Sinais**, **Sem Sinais** ou **Sinais Parciais**
 - Seleção do modo de execução **Monociclo** ou **Multiciclo**
 
 Essas configurações auxiliam na análise do comportamento da CPU sob diferentes perspectivas.
