@@ -18,17 +18,17 @@ O simulador utiliza uma linguagem Assembly própria, definida especificamente pa
 
 ### Instruções de Transferência de Dados
 
-- **LDA** — *Load from Memory*
+- **LDA** — *Load from Memory*  
   **Formato:** `LDA endereço, registrador`  
   Carrega o valor armazenado em um **endereço da memória de dados** para um **registrador**.  
   **Exemplo:** `LDA variavel, R0`
 
-- **LDAi** — *Load Immediate*
+- **LDAi** — *Load Immediate*  
   **Formato:** `LDAi imediato, registrador`  
   Carrega um **valor imediato** diretamente em um **registrador**.  
   **Exemplo:** `LDAi 10, R1`
 
-- **STA** — *Store to Memory*
+- **STA** — *Store to Memory*  
   **Formato:** `STA registrador, endereço`
   Armazena o conteúdo de um **registrador** em um **endereço da memória de dados**.
   **Exemplo:** `STA R0, variavel`
