@@ -88,6 +88,11 @@ O simulador utiliza uma linguagem Assembly própria, definida especificamente pa
 - **HLT** — *Halt*  
   **Formato:** `HLT`  
   Encerra a execução do programa, interrompendo o ciclo de busca e execução da CPU.
+
+---
+
+### Declaração de Variáveis
+  
 - As variáveis devem ser declaradas utilizando **valores inteiros em formato decimal**
 - O uso de **labels** é permitido para identificação de endereços no código:
   - Devem iniciar com **letras**
