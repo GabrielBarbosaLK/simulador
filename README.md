@@ -32,7 +32,7 @@ Cada formato especifica a posição dos campos como **opcode**, registradores e 
 
 Os formatos são apresentados por meio de **figuras**, facilitando a visualização da organização dos 16 bits e o entendimento do processo de decodificação das instruções.
 
-![Instruções](instrucoes.png)
+![Instruções](instrucoes.pdf)
 
 ---
 
