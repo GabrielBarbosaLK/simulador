@@ -39,7 +39,7 @@ O simulador utiliza uma linguagem Assembly própria, definida especificamente pa
 
 - **ADD** — *Addition*  
   **Formato:** `ADD reg_origem1, reg_origem2, reg_destino`  
-  Realiza a soma entre dois **operandos de origem** (`reg_origem1` e `reg_origem2`) e armazena o resultado no **operando de destino** (`reg_destino`). As flags de estado são atualizadas conforme o resultado da operação.  
+  Realiza a soma entre dois **operandos de origem** (`reg_origem1 + reg_origem2`) e armazena o resultado no **operando de destino** (`reg_destino`). As flags de estado são atualizadas conforme o resultado da operação.  
   **Exemplo:** `ADD R1, R2, R0`
 
 - **SUB** — *Subtraction*  
