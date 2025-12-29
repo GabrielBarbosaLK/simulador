@@ -16,7 +16,78 @@ O simulador implementa uma CPU educacional baseada em uma arquitetura simplifica
 
 O simulador utiliza uma linguagem Assembly própria, definida especificamente para esta arquitetura.
 
-- Cada instrução possui uma **descrição breve**, apresentada em uma única linha
+### Instruções de Transferência de Dados
+
+- **LDA** — *Load from Memory*
+  **Formato:** `LDA endereço, registrador`  
+  Carrega o valor armazenado em um **endereço da memória de dados** para um **registrador**.  
+  **Exemplo:** `LDA variavel, R0`
+
+- **LDAi** — *Load Immediate*
+  **Formato:** `LDAi imediato, registrador`  
+  Carrega um **valor imediato** diretamente em um **registrador**.  
+  **Exemplo:** `LDAi 10, R1`
+
+- **STA** — *Store to Memory*
+  **Formato:** `STA registrador, endereço`
+  Armazena o conteúdo de um **registrador** em um **endereço da memória de dados**.
+  **Exemplo:** `STA R0, variavel`
+
+---
+
+### Instruções Aritméticas e Lógicas
+
+- **ADD** — *Addition*  
+  **Formato:** `ADD reg_origem1, reg_origem2, reg_destino`  
+  Realiza a soma entre dois **operandos de origem** (`reg_origem1` e `reg_origem2`) e armazena o resultado no **operando de destino** (`reg_destino`). As flags de estado são atualizadas conforme o resultado da operação.  
+  **Exemplo:** `ADD R1, R2, R0`
+
+- **SUB** — *Subtraction*  
+  **Formato:** `SUB reg_origem1, reg_origem2, reg_destino`  
+  Realiza a subtração entre dois **operandos de origem** (`reg_origem1 − reg_origem2`) e armazena o resultado no **operando de destino** (`reg_destino`). As flags de estado são atualizadas conforme o resultado da operação.  
+  **Exemplo:** `SUB R1, R2, R0`
+
+- **AND** — *Logical AND*  
+  **Formato:** `AND registrador_origem, registrador_destino`  
+  Executa a operação lógica **AND** bit a bit entre os registradores.  
+  **Exemplo:** `AND R2, R0`
+
+- **OR** — *Logical OR*  
+  **Formato:** `OR registrador_origem, registrador_destino`  
+  Executa a operação lógica **OR** bit a bit entre os registradores.  
+  **Exemplo:** `OR R3, R0`
+
+- **NOT** — *Logical NOT*  
+  **Formato:** `NOT registrador`  
+  Inverte todos os bits do registrador especificado.  
+  **Exemplo:** `NOT R0`
+
+---
+
+### Instruções de Controle de Fluxo
+
+- **JZ** — *Jump if Zero*  
+  **Formato:** `JZ endereço`  
+  Realiza um **desvio condicional** para o endereço especificado se a **flag Zero (Z)** estiver ativa.  
+  **Exemplo:** `JZ fim`
+
+- **JN** — *Jump if Negative*  
+  **Formato:** `JN endereço`  
+  Realiza um **desvio condicional** para o endereço especificado se a **flag Negativo (N)** estiver ativa.  
+  **Exemplo:** `JN negativo`
+
+- **JMP** — *Unconditional Jump*  
+  **Formato:** `JMP endereço`  
+  Realiza um **desvio incondicional** para o endereço especificado.  
+  **Exemplo:** `JMP inicio`
+
+---
+
+### Instrução de Controle de Execução
+
+- **HLT** — *Halt*  
+  **Formato:** `HLT`  
+  Encerra a execução do programa, interrompendo o ciclo de busca e execução da CPU.
 - As variáveis devem ser declaradas utilizando **valores inteiros em formato decimal**
 - O uso de **labels** é permitido para identificação de endereços no código:
   - Devem iniciar com **letras**
