@@ -114,12 +114,78 @@ Os formatos serão apresentados por uma **figura**, facilitando a visualização
 
 ## Sinais de Controle
 
-O simulador disponibiliza os sinais de controle utilizados durante a execução das instruções, permitindo uma análise detalhada do funcionamento interno da CPU.
+Os sinais de controle são responsáveis por coordenar o funcionamento dos principais componentes do caminho de dados, definindo quais operações devem ser realizadas em cada ciclo de execução da instrução.
 
-- Cada sinal possui uma **descrição breve**, indicando seu significado e valores possíveis
-- Os sinais são apresentados separadamente para:
-  - **Versão Monociclo**, na qual todos os sinais são ativados em um único ciclo
-  - **Versão Multiciclo**, na qual os sinais variam conforme o estado atual da máquina de controle
+### `wrReg` — Write Register
+
+Controla a **escrita no Banco de Registradores**.  
+Quando ativado, permite que o valor presente na entrada do banco seja armazenado no **registrador de destino**.
+
+Este sinal é ativado nas instruções que produzem um resultado a ser escrito em um registrador, como:  
+`LDA`, `LDAi`, `ADD`, `SUB`, `AND`, `OR` e `NOT`.
+
+Permanece desativado nas instruções que não realizam escrita em registradores, como:  
+`STA`, `JZ`, `JN` e `JMP`.
+
+---
+
+### `rdMem` — Read Memory
+
+Controla a **leitura da Memória de Dados**.  
+Quando ativado, o valor armazenado no endereço especificado é disponibilizado na saída da memória.
+
+Este sinal é ativado exclusivamente na instrução `LDA`, pois essa instrução requer a leitura de um valor da memória para posterior escrita em um registrador.  
+Em todas as demais instruções, o sinal permanece desativado.
+
+---
+
+### `wrMem` — Write Memory
+
+Controla a **escrita na Memória de Dados**.  
+Quando ativado, o valor proveniente de um registrador é armazenado no endereço de memória especificado pela instrução.
+
+Este sinal é ativado apenas na instrução `STA`, que realiza a operação de armazenamento de dados da CPU para a memória.
+
+---
+
+### `muxPC` — Seleção da Fonte do Program Counter
+
+Define a **origem do próximo valor do PC (Program Counter)**.
+
+- Quando configurado como `0`, o PC recebe o valor presente nos **bits 00–07 da instrução**, sendo utilizado em instruções de **desvio (jump)**.
+- Quando configurado como `1`, o PC é atualizado com a saída do somador (`PC + 1`), representando o **avanço sequencial da execução do programa**.
+
+---
+
+### `muxAReg` — Seleção do Registrador de Destino
+
+Seleciona qual campo da instrução será utilizado para identificar o **registrador de destino** no Banco de Registradores.
+
+- Valor `0`: utiliza os **bits 08–10** da instrução (instruções `LDA` e `LDAi`).
+- Valor `1`: utiliza os **bits 00–02** da instrução (instruções aritméticas e lógicas).
+
+---
+
+### `muxDReg` — Seleção da Origem do Dado para Escrita em Registrador
+
+Define a **origem do dado** que será escrito no registrador de destino. Os valores possíveis são:
+
+- `00`: valor imediato presente nos **bits 00–07 da instrução** (`LDAi`);
+- `01`: valor lido da **Memória de Dados** (`LDA`);
+- `10`: resultado produzido pela **ULA** (instruções aritméticas e lógicas).
+
+---
+
+### `opULA` — Código de Operação da ULA
+
+Define qual operação será executada pela **Unidade Lógica e Aritmética (ULA)**.  
+Os códigos de operação suportados são:
+
+- `000` — `ADD` (adição)
+- `001` — `SUB` (subtração)
+- `100` — `AND` (operação lógica AND)
+- `110` — `OR`  (operação lógica OR)
+- `111` — `NOT` (operação lógica NOT)
 
 ---
 
