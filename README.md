@@ -9,8 +9,8 @@ O simulador implementa uma CPU educacional baseada em uma arquitetura simplifica
 - **Memória de Instruções** com capacidade para **256 palavras**
 - **8 registradores de uso geral** (R0 a R7)
 - Suporte aos modos de execução **Monociclo** e **Multiciclo**
-    
-  ** Modo Monociclo**
+   
+  **Modo Monociclo**
  ![Monociclo](mono.png)
   **Modo Multiciclo**
  ![Multicilo](multi.png)
