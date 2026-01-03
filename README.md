@@ -38,8 +38,6 @@ O simulador utiliza uma linguagem Assembly própria, definida especificamente pa
   Armazena o conteúdo de um **registrador** em um **endereço da memória de dados**.
   **Exemplo:** `STA R0, variavel`
 
----
-
 ### Instruções Aritméticas e Lógicas
 
 - **ADD** — *Addition*  
@@ -67,8 +65,6 @@ O simulador utiliza uma linguagem Assembly própria, definida especificamente pa
   Inverte todos os bits do registrador especificado.  
   **Exemplo:** `NOT R0`
 
----
-
 ### Instruções de Controle de Fluxo
 
 - **JZ** — *Jump if Zero*  
@@ -85,8 +81,6 @@ O simulador utiliza uma linguagem Assembly própria, definida especificamente pa
   **Formato:** `JMP endereço`  
   Realiza um **desvio incondicional** para o endereço especificado.  
   **Exemplo:** `JMP inicio`
-
----
 
 ### Instrução de Controle de Execução
 
