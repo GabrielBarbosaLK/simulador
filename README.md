@@ -17,6 +17,29 @@ O simulador implementa uma CPU educacional baseada em uma arquitetura simplifica
 
 ---
 
+## Operação do Simulador
+
+A interação com o simulador é realizada por meio dos seguintes controles:
+
+- **ASSEMBLE (Montar)**: traduz o código Assembly para a representação interna de instruções
+- **PLAY**: inicia a execução contínua do programa
+- **PAUSE**: pausa a execução no ciclo atual
+- **FORWARD (Passo-a-Passo)**: executa o programa de forma controlada, permitindo análise instrução por instrução ou ciclo a ciclo
+
+---
+
+## Configurações do Simulador
+
+O simulador permite ajustar diferentes opções de execução e visualização:
+
+- Exibição de valores em **Hexadecimal** ou **Decimal**
+- Exibição de sinais de controle **Com Sinais**, **Sem Sinais** ou **Sinais Parciais**
+- Seleção do modo de execução **Monociclo** ou **Multiciclo**
+
+Essas configurações auxiliam na análise do comportamento da CPU sob diferentes perspectivas.
+
+---
+
 ## Instruções Assembly
 
 O simulador utiliza uma linguagem Assembly própria, definida especificamente para esta arquitetura.
@@ -173,29 +196,6 @@ Os códigos de operação suportados são:
 - `100` — `AND` (operação lógica AND)
 - `110` — `OR`  (operação lógica OR)
 - `111` — `NOT` (operação lógica NOT)
-
----
-
-## Operação do Simulador
-
-A interação com o simulador é realizada por meio dos seguintes controles:
-
-- **ASSEMBLE (Montar)**: traduz o código Assembly para a representação interna de instruções
-- **PLAY**: inicia a execução contínua do programa
-- **PAUSE**: pausa a execução no ciclo atual
-- **FORWARD (Passo-a-Passo)**: executa o programa de forma controlada, permitindo análise instrução por instrução ou ciclo a ciclo
-
----
-
-## Configurações do Simulador
-
-O simulador permite ajustar diferentes opções de execução e visualização:
-
-- Exibição de valores em **Hexadecimal** ou **Decimal**
-- Exibição de sinais de controle **Com Sinais**, **Sem Sinais** ou **Sinais Parciais**
-- Seleção do modo de execução **Monociclo** ou **Multiciclo**
-
-Essas configurações auxiliam na análise do comportamento da CPU sob diferentes perspectivas.
 
 ---
 
