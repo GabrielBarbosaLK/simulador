@@ -126,8 +126,6 @@ Este sinal é ativado nas instruções que produzem um resultado a ser escrito e
 Permanece desativado nas instruções que não realizam escrita em registradores, como:  
 `STA`, `JZ`, `JN` e `JMP`.
 
----
-
 ### `rdMem` — Read Memory
 
 Controla a **leitura da Memória de Dados**.  
@@ -136,16 +134,12 @@ Quando ativado, o valor armazenado no endereço especificado é disponibilizado 
 Este sinal é ativado exclusivamente na instrução `LDA`, pois essa instrução requer a leitura de um valor da memória para posterior escrita em um registrador.  
 Em todas as demais instruções, o sinal permanece desativado.
 
----
-
 ### `wrMem` — Write Memory
 
 Controla a **escrita na Memória de Dados**.  
 Quando ativado, o valor proveniente de um registrador é armazenado no endereço de memória especificado pela instrução.
 
 Este sinal é ativado apenas na instrução `STA`, que realiza a operação de armazenamento de dados da CPU para a memória.
-
----
 
 ### `muxPC` — Seleção da Fonte do Program Counter
 
@@ -154,16 +148,12 @@ Define a **origem do próximo valor do PC (Program Counter)**.
 - Quando configurado como `0`, o PC recebe o valor presente nos **bits 00–07 da instrução**, sendo utilizado em instruções de **desvio (jump)**.
 - Quando configurado como `1`, o PC é atualizado com a saída do somador (`PC + 1`), representando o **avanço sequencial da execução do programa**.
 
----
-
 ### `muxAReg` — Seleção do Registrador de Destino
 
 Seleciona qual campo da instrução será utilizado para identificar o **registrador de destino** no Banco de Registradores.
 
 - Valor `0`: utiliza os **bits 08–10** da instrução (instruções `LDA` e `LDAi`).
 - Valor `1`: utiliza os **bits 00–02** da instrução (instruções aritméticas e lógicas).
-
----
 
 ### `muxDReg` — Seleção da Origem do Dado para Escrita em Registrador
 
@@ -172,8 +162,6 @@ Define a **origem do dado** que será escrito no registrador de destino. Os valo
 - `00`: valor imediato presente nos **bits 00–07 da instrução** (`LDAi`);
 - `01`: valor lido da **Memória de Dados** (`LDA`);
 - `10`: resultado produzido pela **ULA** (instruções aritméticas e lógicas).
-
----
 
 ### `opULA` — Código de Operação da ULA
 
