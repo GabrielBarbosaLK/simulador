@@ -26,6 +26,13 @@ A interação com o simulador é realizada por meio dos seguintes controles:
 - **PAUSE**: pausa a execução no ciclo atual
 - **FORWARD (Passo-a-Passo)**: executa o programa de forma controlada, permitindo análise instrução por instrução ou ciclo a ciclo
 
+| Controles | Visual |
+|----------|--------|
+| **ASSEMBLE (Montar)**: traduz o código Assembly para a representação interna de instruções | ![](assemble.png) |
+| **PLAY**: inicia a execução contínua do programa | ![](play.png) |
+| **PAUSE**: pausa a execução no ciclo atual | ![](pause.png) |
+| **FORWARD (Passo-a-Passo)**: executa o programa de forma controlada | ![](forward.png) |
+
 ---
 
 ## Configurações do Simulador
