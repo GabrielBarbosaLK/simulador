@@ -192,7 +192,7 @@ A interação com o simulador é realizada por meio dos seguintes controles:
 O simulador permite ajustar diferentes opções de execução e visualização:
 
 - Exibição de valores em **Hexadecimal** ou **Decimal**
-- Exubução de sinais de controle **Com Sinais**, **Sem Sinais** ou **Sinais Parciais**
+- Exibição de sinais de controle **Com Sinais**, **Sem Sinais** ou **Sinais Parciais**
 - Seleção do modo de execução **Monociclo** ou **Multiciclo**
 
 Essas configurações auxiliam na análise do comportamento da CPU sob diferentes perspectivas.
