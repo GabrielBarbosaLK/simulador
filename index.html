@@ -2669,6 +2669,135 @@
               hlt = true;
             }
           }, 2000)
+
+          let teste_sinais = document.getElementById("tipo_sinais").value;
+
+          if (teste_sinais == "ativado" || teste_sinais == "teleporte") {
+            clones[21].style.display = "block";
+            clones[22].style.display = "block";
+            clones[23].style.display = "block";
+            clones[24].style.display = "block";
+            clones[25].style.display = "block";
+            clones[26].style.display = "block";
+            clones[27].style.display = "block";
+
+            clones[21].style.backgroundColor = "DodgerBlue";
+            clones[22].style.backgroundColor = "DodgerBlue";
+            clones[23].style.backgroundColor = "DodgerBlue";
+            clones[24].style.backgroundColor = "DodgerBlue";
+            clones[25].style.backgroundColor = "DodgerBlue";
+            clones[26].style.backgroundColor = "DodgerBlue";
+            clones[27].style.backgroundColor = "DodgerBlue";
+
+            clones[21].innerText = log[clock][5][0];
+            clones[21].style.width = "20px";
+
+            clones[22].innerHTML = log[clock][5][1];
+            clones[22].style.width = "20px";
+
+            clones[23].innerText = log[clock][5][2];
+            clones[23].style.width = "20px";
+
+            clones[24].innerText = log[clock][5][3];
+            clones[24].style.width = "20px";
+
+            clones[25].innerText = log[clock][5][4];
+            clones[25].style.width = "20px";
+
+            let aux = log[clock][5][5].toString();
+            while (aux.length < 2) {
+              aux = "0" + aux;
+            };
+            clones[26].innerText = aux;
+            clones[26].style.width = "30px";
+
+            aux = log[clock][5][5].toString();
+            while (aux.length < 3) {
+              aux = "0" + aux;
+            }
+            clones[27].innerText = aux;
+            clones[27].style.width = "40px";
+
+            moveBall(clones[21], lines.line48);
+            setTimeout(() => {
+              moveBall(clones[21], lines.line49);
+              setTimeout(() => {
+                if (log[clock][5][0] == 0) {
+                  document.getElementById("line68").style.strokeWidth = 2;
+                  document.getElementById("line69").style.strokeWidth = 0;
+                } else if (log[clock][5][0] == 1) {
+                  document.getElementById("line69").style.strokeWidth = 2;
+                  document.getElementById("line68").style.strokeWidth = 0;
+                } 
+              }, 1000);
+            }, 1000);
+
+            moveBall(clones[22], lines.line50);
+            setTimeout(() => {
+              moveBall(clones[22], lines.line51);
+            }, 1000);
+
+            moveBall(clones[23], lines.line52);
+            setTimeout(() => {
+              moveBall(clones[23], lines.line53);
+            }, 1000);
+
+            moveBall(clones[24], lines.line54);
+            setTimeout(() => {
+              moveBall(clones[24], lines.line55);
+              setTimeout(() => {
+                moveBall(clones[24], lines.line56);
+                setTimeout(() => {
+                  moveBall(clones[24], lines.line57);
+                  setTimeout(() => {
+                    if (log[clock][5][3] == 0) {
+                      document.getElementById("line71").style.strokeWidth = 0;
+                      document.getElementById("line70").style.strokeWidth = 2;
+                    } else if (log[clock][5][3] == 1) {
+                      document.getElementById("line70").style.strokeWidth = 0;
+                      document.getElementById("line71").style.strokeWidth = 2;
+                    } 
+                  }, 1000);
+                }, 1000);
+              }, 1000);
+            }, 1000);
+
+            moveBall(clones[25], lines.line58);
+            setTimeout(() => {
+              moveBall(clones[25], lines.line59);
+            }, 1000);
+
+            moveBall(clones[26], lines.line60);
+            setTimeout(() => {
+              moveBall(clones[26], lines.line61);
+              setTimeout(() => {
+                moveBall(clones[26], lines.line62);
+                setTimeout(() => {
+                  moveBall(clones[26], lines.line63);
+                  setTimeout(() => {
+                    if (log[clock][5][5] == "00") {
+                      document.getElementById("line72").style.strokeWidth = 2;
+                      document.getElementById("line73").style.strokeWidth = 0;
+                      document.getElementById("line74").style.strokeWidth = 0;
+                    } else if (log[clock][5][5] == "01") {
+                      document.getElementById("line73").style.strokeWidth = 2;
+                      document.getElementById("line72").style.strokeWidth = 0;
+                      document.getElementById("line74").style.strokeWidth = 0;
+                    } else if (log[clock][5][5] == "10") {
+                      document.getElementById("line74").style.strokeWidth = 2;
+                      document.getElementById("line72").style.strokeWidth = 0;
+                      document.getElementById("line73").style.strokeWidth = 0;
+                    }
+                  }, 1000);
+                }, 1000);
+              }, 1000);
+            }, 1000);
+
+            moveBall(clones[27], lines.line64);
+            setTimeout(() => {
+              moveBall(clones[27], lines.line65);
+            }, 1000);
+          }
         }
           
 
